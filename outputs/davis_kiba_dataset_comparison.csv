@@ -1,3 +1,0 @@
-Dataset,Original records,Original ligands,Original targets,Original observed pairs,Deduplicated ligands,Deduplicated targets,Deduplicated observed pairs,Possible pairs (ligands * targets),Coverage (%),Sparsity (%)
-DAVIS,30056,68,379,25772,68,379,25772,25772,100.0,0.0
-KIBA,118254,2068,229,117657,2068,229,117657,473572,24.844585406231786,75.15541459376821

@@ -46,6 +46,10 @@ Task 2 copy was removed. Missing KIBA observations are never zero-filled.
 
 ## Generated files
 
+These are intentionally omitted from the submission branch and Git-ignored.
+Run `python shared_data.py` before the notebooks or training runners to recreate
+them. The six input CSVs above are the authoritative inputs and remain included.
+
 | Files | Purpose |
 |---|---|
 | `data/{davis,kiba}_{drug,protein}_mapping.csv` | Four lookup tables linking canonical IDs to original SMILES/sequences |
@@ -79,5 +83,5 @@ partitions. `open_task/` holds generated embeddings, joint ID mappings and
 cold-target splits; its IDs differ from the dataset-specific Task 2 IDs.
 Those generated files are created by `open_task/prepare_data.ipynb` and ignored by Git.
 
-The six shared split CSVs were moved without changing their bytes. Recorded
-experiment provenance may retain paths from before this folder consolidation.
+Generation preserves the six original split CSVs byte-for-byte. Recorded
+experiment provenance may retain paths from before the folder consolidation.
