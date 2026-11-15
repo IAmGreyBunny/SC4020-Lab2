@@ -12,7 +12,7 @@
       "cleaned_rows": 25772,
       "score_scale": "supplied pKd",
       "score_transformation": "none",
-      "cleaned_reference": "task2/data/davis_clean_task2.csv",
+      "cleaned_reference": "data/davis_clean.csv",
       "reclean_max_abs_difference": 1.7763568394002505e-15,
       "reclean_nonidentical_floats": 121,
       "cleaned_serialization_policy": "retain exact validated cleaned cells after mean-aggregation audit"

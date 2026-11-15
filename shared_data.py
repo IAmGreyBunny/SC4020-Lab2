@@ -19,7 +19,7 @@ TEXT_KEYS = [SMILES, SEQUENCE]
 RAW_COLUMNS = TEXT_KEYS + ["affinity"]
 INDEXED_COLUMNS = PAIR_KEYS + RAW_COLUMNS
 SCHEMA = "dataset_wide_sorted_identity_v1"
-CLEANED = {"davis": "task2/data/davis_clean_task2.csv", "kiba": "data/kiba_clean.csv"}
+CLEANED = {"davis": "data/davis_clean.csv", "kiba": "data/kiba_clean.csv"}
 EXPECTED = {"davis": (68, 379, 25772), "kiba": (2068, 229, 117657)}
 
 
@@ -147,7 +147,7 @@ def _write_verified(path, render, check_only):
 def split_rows(dataset, cleaned_rows, root=ROOT):
     """Recover original row order and decimal tokens from compact assignments."""
     parts = {name: [] for name in ("train", "val", "test")}
-    path = Path(root) / "task2/data" / f"{dataset}_split_assignment.csv"
+    path = Path(root) / "data" / f"{dataset}_split_assignment.csv"
     with path.open(newline="", encoding="utf-8") as stream:
         reader = csv.reader(stream)
         if next(reader) != ["split", "cleaned_row", "affinity_override"]:
@@ -249,7 +249,7 @@ def prepare(root=ROOT, check_only=False):
             differences = [abs(float(r[2]) - float(cleaned_pairs[tuple(r[:2])])) for r in rows]
             if max(differences) > 1e-12:
                 raise ValueError("Existing split affinities disagree meaningfully with cleaned observations")
-            target = root / "task2/data/splits" / f"{dataset}_{split}.csv"
+            target = root / "data/splits" / f"{dataset}_{split}.csv"
             digest = _write_verified(target, indexed_writer(rows), check_only)
             with target.open(newline="", encoding="utf-8") as stream:
                 reader = csv.reader(stream)
@@ -302,7 +302,7 @@ def load_task2_split(dataset, split, task2_root=None):
         raise ValueError(split)
     task2_root = Path(task2_root) if task2_root is not None else ROOT / "task2"
     metadata = load_mappings(dataset, task2_root.parent)
-    frame = pd.read_csv(task2_root / "data/splits" / f"{dataset}_{split}.csv", float_precision="round_trip")
+    frame = pd.read_csv(task2_root.parent / "data/splits" / f"{dataset}_{split}.csv", float_precision="round_trip")
     for column, kind in ((DRUG, "drug"), (PROTEIN, "protein")):
         values = positions(frame, column, metadata[f"n_{kind}s"])
         trace = SMILES if kind == "drug" else SEQUENCE

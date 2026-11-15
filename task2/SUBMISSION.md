@@ -24,12 +24,11 @@ submission/
 ├── data/
 │   ├── davis_all.csv
 │   ├── kiba_all.csv
-│   └── kiba_clean.csv
+│   ├── davis_clean.csv
+│   ├── kiba_clean.csv
+│   ├── davis_split_assignment.csv
+│   └── kiba_split_assignment.csv
 └── task2/
-    ├── data/
-    │   ├── davis_clean_task2.csv
-    │   ├── davis_split_assignment.csv
-    │   └── kiba_split_assignment.csv
     ├── utils/
     │   ├── global_mean.py
     │   ├── protein_cf.py
@@ -54,9 +53,9 @@ The six input CSVs are sufficient for the actual preparation checks. The raw dat
 supports cleaning/count verification; the validated cleaned files preserve score
 serialization; the compact assignments preserve the original split rows and
 affinity tokens. Canonical mappings and indexed splits are regenerated, so they
-do not need to be shipped as extra copies. The exploratory analysis writes a
-separate `data/davis_clean.csv`; this package uses the validated Task 2 reference
-at `task2/data/davis_clean_task2.csv` instead.
+do not need to be shipped as extra copies. All tasks share `data/davis_clean.csv`, retaining the exact validated pKd
+serialization used by the existing split assignments. There is no second cleaned
+DAVIS copy or `task2/data/` folder.
 
 ## Run the notebook
 

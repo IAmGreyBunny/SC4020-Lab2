@@ -208,11 +208,11 @@ def run_id(cfg):
 def current_fingerprints():
     sources = [ROOT / "utils" / f"{name}.py" for name in ("biased_mf", "evaluation", "protein_cf", "drug_cf", "global_mean")]
     sources += [ROOT.parent / "shared_data.py", Path(__file__)]
-    data = [ROOT / "data/splits" / f"{ds}_{part}.csv"
+    data = [ROOT.parent / "data/splits" / f"{ds}_{part}.csv"
             for ds, part in product(("davis", "kiba"), ("train", "val"))]
     mappings = [ROOT.parent / "data" / f"{ds}_{kind}_mapping.csv"
                 for ds, kind in product(("davis", "kiba"), ("drug", "protein"))]
-    assignments = [ROOT / "data" / f"{ds}_split_assignment.csv" for ds in ("davis", "kiba")]
+    assignments = [ROOT.parent / "data" / f"{ds}_split_assignment.csv" for ds in ("davis", "kiba")]
     return {os.path.relpath(path, ROOT): sha(path) for path in sources + data + mappings + assignments}
 
 
@@ -319,7 +319,7 @@ def prepare():
             data_rows.append(dict(dataset=ds, split=part, rows=len(frame),
                                   drugs=frame[PAIR_KEYS[0]].nunique(), targets=frame[PAIR_KEYS[1]].nunique(),
                                   min_affinity=float(frame.affinity.min()), max_affinity=float(frame.affinity.max()),
-                                   sha256=fingerprints[f"data/splits/{ds}_{part}.csv"],
+                                   sha256=fingerprints[f"../data/splits/{ds}_{part}.csv"],
                                   pair_uniqueness="passed", training_coverage="passed",
                                   train_validation_disjoint="passed"))
         _, candidate = candidate_distribution(parts["val"], ds)
