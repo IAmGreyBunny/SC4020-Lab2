@@ -5,11 +5,7 @@ import numpy as np
 from utils.biased_mf import predict_biased_mf
 from shared_data import DRUG, PROTEIN
 
-# Five neighbours: one alone loses to the drug mean once the holdout passes 0.2, because the
-# nearest remaining training protein drifts away as training shrinks; twenty-five dilutes the
-# close ones at small holdouts. Fixed, not selected, so this adds no validation pass.
 NEIGHBOURS = 5
-
 
 def predict_improved_biased_mf(model, pairs, protein_ids, protein_vectors, trained_protein_ids,
                          baseline, k=NEIGHBOURS):
