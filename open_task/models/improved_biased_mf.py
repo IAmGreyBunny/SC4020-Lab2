@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from utils.biased_mf import predict_biased_mf
+from task2.utils.biased_mf import predict_biased_mf
 from shared_data import DRUG, PROTEIN
 
 NEIGHBOURS = 5

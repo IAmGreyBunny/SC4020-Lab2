@@ -31,18 +31,18 @@ input layout.
 
 - `data/davis_all.csv`
 - `data/kiba_all.csv`
-- `task2/data/davis_clean_task2.csv` — validated DAVIS pKd values
+- `data/davis_clean.csv` — validated DAVIS pKd values
 - `data/kiba_clean.csv` — validated supplied transformed KIBA scores
-- `task2/data/davis_split_assignment.csv`
-- `task2/data/kiba_split_assignment.csv`
+- `data/davis_split_assignment.csv`
+- `data/kiba_split_assignment.csv`
 
 The compact assignment files store cleaned-row positions in original split
 order, plus affinity-token overrides where older CSV serialization differs.
 They preserve the existing approximately 70/15/15 warm-start split.
 
-DAVIS is already pKd, so no second logarithmic conversion is applied. The retained
-`data/davis_clean.csv` is an older double-conversion artifact and is not an input
-to this generator. Missing KIBA interactions remain unobserved, not zero-filled.
+DAVIS is already pKd, so no second logarithmic conversion is applied.
+`data/davis_clean.csv` is the single validated cleaned DAVIS input. The duplicate
+Task 2 copy was removed. Missing KIBA observations are never zero-filled.
 
 ## Generated files
 
@@ -50,7 +50,7 @@ to this generator. Missing KIBA interactions remain unobserved, not zero-filled.
 |---|---|
 | `data/{davis,kiba}_{drug,protein}_mapping.csv` | Four lookup tables linking canonical IDs to original SMILES/sequences |
 | `data/{davis,kiba}_indexed.csv` | Two complete cleaned observation tables with canonical IDs |
-| `task2/data/splits/{davis,kiba}_{train,val,test}.csv` | Six original Task 2 partitions with canonical IDs added |
+| `data/splits/{davis,kiba}_{train,val,test}.csv` | Six original Task 2 partitions with canonical IDs added |
 | `data/preparation_report.json` | Cleaning counts, preservation checks and hashes |
 
 Indexed observation columns are:
@@ -73,3 +73,11 @@ coverage, training coverage of evaluation entities and exact CSV cell
 preservation. Raw mean-aggregation checks use absolute tolerance `1e-12` for
 historical floating-point serialization differences, recorded in the report.
 It performs no model fitting or test prediction.
+
+All runtime datasets live under this folder. `splits/` holds the shared Task 2
+partitions. `open_task/` holds generated embeddings, joint ID mappings and
+cold-target splits; its IDs differ from the dataset-specific Task 2 IDs.
+Those generated files are created by `open_task/prepare_data.ipynb` and ignored by Git.
+
+The six shared split CSVs were moved without changing their bytes. Recorded
+experiment provenance may retain paths from before this folder consolidation.

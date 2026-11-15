@@ -290,10 +290,10 @@ class ExperimentTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "task2"
-            splits = root / "data" / "splits"
+            splits = root.parent / "data" / "splits"
             splits.mkdir(parents=True)
             mappings = root.parent / "data"
-            mappings.mkdir(parents=True)
+            mappings.mkdir(parents=True, exist_ok=True)
             for dataset in ("davis", "kiba"):
                 train.to_csv(splits / f"{dataset}_train.csv", index=False)
                 val.to_csv(splits / f"{dataset}_val.csv", index=False)

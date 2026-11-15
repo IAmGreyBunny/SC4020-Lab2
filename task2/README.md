@@ -47,7 +47,7 @@ notebook, private artifact or external results folder is required.
 
 - `shared_data.py` validates raw cleaning and reconstructs deterministic canonical
   mappings from each complete cleaned dataset before applying the fixed splits.
-- Existing `data/splits/{dataset}_{train,val,test}.csv` filenames are retained.
+- Shared root `data/splits/{dataset}_{train,val,test}.csv` filenames are retained.
   Their columns include numeric IDs, original identifiers and measured affinity.
 - DAVIS uses supplied pKd without another logarithmic conversion. Missing KIBA
   interactions remain unobserved; genuine zero scores remain valid observations.
